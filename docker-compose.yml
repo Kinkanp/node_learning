@@ -1,0 +1,46 @@
+version: '3.9'
+
+services:
+  server:
+    image: kinkan1/node-learning
+    container_name: node-learning_server
+    command: sh -c "npm run setup && npm start"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - .:/usr/src/app/
+    restart: unless-stopped
+    ports:
+      - "8001:8001"
+
+  db:
+    image: postgres:15-alpine
+    restart: always
+    container_name: node-learning_db
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: $DB_PASSWORD
+      POSTGRES_DB: $DB_NAME
+      POSTGRES_USER: $DB_USER
+      PGDATA: /var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  redis:
+    image: redis:7.0.11-alpine
+    container_name: node-learning_redis
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379"
+
+volumes:
+  db_data:
+  redis_data:

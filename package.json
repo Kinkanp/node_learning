@@ -1,0 +1,26 @@
+{
+  "name": "learning",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "nodemon --delay 0.1 --watch src --exec 'node src/main.js'",
+    "setup": "node setup/setup.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@aws-sdk/client-sqs": "^3.329.0",
+    "aws-sdk": "^2.1376.0",
+    "bull": "^4.10.4",
+    "dotenv": "^16.0.3",
+    "nodemailer": "^6.9.1",
+    "pg": "^8.10.0",
+    "redis": "^4.6.6"
+  },
+  "devDependencies": {
+    "@types/bull": "^4.10.0",
+    "nodemon": "^2.0.22"
+  }
+}
